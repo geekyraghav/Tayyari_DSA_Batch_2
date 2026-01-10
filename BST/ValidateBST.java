@@ -1,25 +1,51 @@
 package BST;
 
+
+
 import java.util.ArrayList;
 
 public class ValidateBST {
-    static int prev;
+    public class Pair{
+        int max;
+        int min;
+        Pair(int max, int min){
+            this.max = max;
+            this.min = min;
+        }
+    }
     static boolean flag;
     public boolean isBST(Node root) {
-        prev = Integer.MIN_VALUE;
-        flag = true; // true means BST hai
-        dfs(root);
+        flag = true;
+        maxMin(root);
         return flag;
     }
-
-
-    private void dfs(Node root) {
-        if(root==null) return;
-        dfs(root.left);
-        if(prev >= root.data) flag = false; // false means BST nahi hai
-        prev = root.data;
-        dfs(root.right);
+    private Pair maxMin(Node root) {
+        if(root==null) return new Pair(Integer.MIN_VALUE,Integer.MAX_VALUE);
+        Pair left = maxMin(root.left);
+        Pair right = maxMin(root.right);
+        if(root.data <= left.max || root.data >= right.min) flag = false; // EXTRA
+        int max = Math.max(root.data, Math.max(left.max,right.max));
+        int min = Math.min(root.data, Math.min(left.min,right.min));
+        return new Pair(max,min);
     }
+
+//    static int prev;
+//    static boolean flag;
+//    public boolean isBST(Node root) {
+//        prev = Integer.MIN_VALUE;
+//        flag = true; // true means BST hai
+//        dfs(root);
+//        return flag;
+//    }
+//
+//
+//    private void dfs(Node root) {
+//        if(root==null) return;
+//        dfs(root.left);
+//        if(prev >= root.data) flag = false; // false means BST nahi hai
+//        prev = root.data;
+//        dfs(root.right);
+//    }
 
 //    public boolean isBST(Node root) {
 //        ArrayList<Integer> ans = new ArrayList<>();

@@ -1,19 +1,5 @@
 package OOPS;
-class Car{
-    String name; // null
-    int power; // 0
-    Car(String n, int p){
-        name = n;
-        power = p;
-    }
-    Car(int p, String n){
-        name = n;
-        power = p;
-    }
-    Car(){
 
-    }
-}
 public class PassingObjectsToMethods {
     public static void change(Car c){ // Pass by reference
         c.power = 140;

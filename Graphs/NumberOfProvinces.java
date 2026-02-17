@@ -6,26 +6,38 @@ public class NumberOfProvinces {
         int count = 0;
         for(int i=0;i<n;i++){
             if(!vis[i]){
-                bfs(i,adj,vis);
+                // bfs(i,adj,vis);
+                dfs(i,adj,vis);
                 count++;
             }
         }
         return count;
     }
 
-    private static void bfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
+    private static void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
         int n = vis.length;
-        Queue<Integer> q = new LinkedList<>();
-        q.add(node);
         vis[node] = true;
-        while(q.size() > 0){
-            int front = q.remove();
-            for(int i=0;i<n;i++){
-                if(i!=front && !vis[i] && adj.get(front).get(i)==1){ // adj[front][i]
-                    q.add(i);
-                    vis[i] = true;
-                }
+        for(int i=0;i<n;i++){
+            if(i!=node && !vis[i] && adj.get(node).get(i)==1){ // adj[front][i]
+                dfs(i,adj,vis);
+                vis[i] = true;
             }
         }
     }
+
+//    private static void bfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
+//        int n = vis.length;
+//        Queue<Integer> q = new LinkedList<>();
+//        q.add(node);
+//        vis[node] = true;
+//        while(q.size() > 0){
+//            int front = q.remove();
+//            for(int i=0;i<n;i++){
+//                if(i!=front && !vis[i] && adj.get(front).get(i)==1){ // adj[front][i]
+//                    q.add(i);
+//                    vis[i] = true;
+//                }
+//            }
+//        }
+//    }
 }
